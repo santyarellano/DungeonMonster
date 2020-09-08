@@ -21,11 +21,11 @@ public class Titles {
 		this.width = width;
 		this.height = height;
 		// Get images
-		File fSprBg = new File("../Images/Titles/bg.png");
-		File fSprTitle = new File("../Images/Titles/MainMenu/DunMons.png");
-		File fSprWin = new File("../Images/Titles/MainMenu/win.png");
-		File fSprLoose = new File("../Images/Titles/MainMenu/loose.png");
-		File fSprPlay = new File("../Images/Titles/MainMenu/play.png");
+		File fSprBg = new File("res/Images/Titles/bg.png");
+		File fSprTitle = new File("res/Images/Titles/MainMenu/DunMons.png");
+		File fSprWin = new File("res/Images/Titles/MainMenu/win.png");
+		File fSprLoose = new File("res/Images/Titles/MainMenu/loose.png");
+		File fSprPlay = new File("res/Images/Titles/MainMenu/play.png");
 		try {
 			sprBg = ImageIO.read(fSprBg);
 			sprWin = ImageIO.read(fSprWin);

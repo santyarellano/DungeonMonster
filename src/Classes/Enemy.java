@@ -22,12 +22,12 @@ public class Enemy extends Character {
 		hsp = -1;
 		shooting = false;
 		// Get images
-		File fSprIdle = new File("../Images/Monster/monsterIdle.png");
-		File fSprStp1 = new File("../Images/Monster/monsterW1.png");
-		File fSprStp2 = new File("../Images/Monster/monsterW2.png");
-		File fSprStp3 = new File("../Images/Monster/monsterW3.png");
-		File fSprStp4 = new File("../Images/Monster/monsterW4.png");
-		File fSprAir = new File("../Images/Monster/monsterAir.png");
+		File fSprIdle = new File("res/Images/Monster/monsterIdle.png");
+		File fSprStp1 = new File("res/Images/Monster/monsterW1.png");
+		File fSprStp2 = new File("res/Images/Monster/monsterW2.png");
+		File fSprStp3 = new File("res/Images/Monster/monsterW3.png");
+		File fSprStp4 = new File("res/Images/Monster/monsterW4.png");
+		File fSprAir = new File("res/Images/Monster/monsterAir.png");
 		try {
 			sprIdle = ImageIO.read(fSprIdle);
 			sprStp1 = ImageIO.read(fSprStp1);

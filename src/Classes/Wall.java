@@ -15,7 +15,7 @@ public class Wall extends GameObj {
 	public Wall(int xPos, int yPos, int width, int height, boolean isVisible, String id) {
 		super(xPos, yPos, width, height, isVisible, id);
 
-		File fSprite = new File("../Images/Pisos/wall.png");
+		File fSprite = new File("res/Images/Pisos/wall.png");
 		try {
 			sprite = ImageIO.read(fSprite);
 		} catch (IOException e) {

@@ -113,7 +113,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 		}
 
 		// Audio
-		String prefix = "";
+		String prefix = "res/";
 		File bgMusic = new File(prefix + "Sounds/bgMusic.wav");
 		File battleMusic = new File(prefix + "Sounds/battleMusic.wav");
 		File poisonFX = new File(prefix + "Sounds/poison.wav");

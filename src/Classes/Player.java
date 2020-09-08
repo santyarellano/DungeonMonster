@@ -22,9 +22,9 @@ public class Player extends Character {
 		spr_pos = 0;
 
 		// Get images
-		File fSprIdle = new File("../Images/Hero/Hero.png");
-		File fSprStp1 = new File("../Images/Hero/Hero_STPONE.png");
-		File fSprStp3 = new File("../Images/Hero/Hero_STP3.png");
+		File fSprIdle = new File("res/Images/Hero/Hero.png");
+		File fSprStp1 = new File("res/Images/Hero/Hero_STPONE.png");
+		File fSprStp3 = new File("res/Images/Hero/Hero_STP3.png");
 		try {
 			sprIdle = ImageIO.read(fSprIdle);
 			sprStp1 = ImageIO.read(fSprStp1);
