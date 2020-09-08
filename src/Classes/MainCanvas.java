@@ -113,11 +113,12 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 		}
 
 		// Audio
-		File bgMusic = new File("../Sounds/bgMusic.wav");
-		File battleMusic = new File("../Sounds/battleMusic.wav");
-		File poisonFX = new File("../Sounds/poison.wav");
-		File mHitFX = new File("../Sounds/mHit.wav");
-		File pHitFX = new File("../Sounds/pHit.wav");
+		String prefix = "";
+		File bgMusic = new File(prefix + "Sounds/bgMusic.wav");
+		File battleMusic = new File(prefix + "Sounds/battleMusic.wav");
+		File poisonFX = new File(prefix + "Sounds/poison.wav");
+		File mHitFX = new File(prefix + "Sounds/mHit.wav");
+		File pHitFX = new File(prefix + "Sounds/pHit.wav");
 		try {
 			mainMenuAudio = AudioSystem.getAudioInputStream(bgMusic);
 			battleAudio = AudioSystem.getAudioInputStream(battleMusic);
