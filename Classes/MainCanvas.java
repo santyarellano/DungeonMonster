@@ -20,7 +20,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 
-public class MainCanvas extends JPanel implements KeyListener, ActionListener{
+public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 	// Instance variables
 	private boolean isPlaying, inFloor;
 	private Timer timer;
@@ -55,31 +55,18 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 	private Clip mHitClip;
 	private Clip pHitClip;
 	private boolean musicBegan = false, fxBegan = false;
-	private int[] scn = {
-			1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-			1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 2, 0, 0, 0, 0, 3, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-			1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-			1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-	};
-	
-	//------------------------ MAP CODES ----------------------------------
+	private int[] scn = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 3, 0, 1, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+			0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
+	// ------------------------ MAP CODES ----------------------------------
 	/*
-	 * 0 = null
-	 * 1 = wall
-	 * 2 = player start point
-	 * 3 = enemies
-	 * 4 = civilian
-	 * 5 = elevator
+	 * 0 = null 1 = wall 2 = player start point 3 = enemies 4 = civilian 5 =
+	 * elevator
 	 */
-	//------------------------ MAP CODES ----------------------------------
-	
-	//----------------------- CONSTRUCTOR -----------------------------
+	// ------------------------ MAP CODES ----------------------------------
+
+	// ----------------------- CONSTRUCTOR -----------------------------
 	public MainCanvas(int scr_size) {
 		super();
 		setFocusable(true);
@@ -89,49 +76,48 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 		leftKey = 0;
 		rightKey = 0;
 		jumpKey = 0;
-		tileSize = scr_size/divi;
+		tileSize = scr_size / divi;
 		bgColor = new Color(79, 79, 79);
 		im = new BufferedImage(scr_size, scr_size, BufferedImage.TYPE_INT_RGB);
 		walls = new Walls();
 		tools = new Tools();
-		poison = new Poison(0, 0, tileSize*2, tileSize*2);
+		poison = new Poison(0, 0, tileSize * 2, tileSize * 2);
 		titles = new Titles(0, 0, scr_size, scr_size);
 		enemySpd = 2;
 		// Create objects
 		for (int i = 0; i < divi; i++) {
 			for (int j = 0; j < divi; j++) {
-				int arrPos = (i*divi) + j;
-				switch(scn[arrPos]) {
-				case 0:
-					break;
-				case 1:
-					int wallX = j*tileSize;
-					int wallY = i*tileSize;
-					walls.addWall(wallX, wallY, tileSize);
-					break;
-				case 2:
-					int x = j*tileSize;
-					int y = i*tileSize;
-					player = new Player(x, y, tileSize, tileSize, INI_PLAYER_HEALTH, 0, true, 
-							true, "Player");
-					break;
-				case 3:
-					int eX = j*tileSize;
-					int eY = i*tileSize;
-					enemy = new Enemy(eX, eY, tileSize*2, tileSize*2, INI_ENEMY_HEALTH);
-					break;
-				default:
-					break;
+				int arrPos = (i * divi) + j;
+				switch (scn[arrPos]) {
+					case 0:
+						break;
+					case 1:
+						int wallX = j * tileSize;
+						int wallY = i * tileSize;
+						walls.addWall(wallX, wallY, tileSize);
+						break;
+					case 2:
+						int x = j * tileSize;
+						int y = i * tileSize;
+						player = new Player(x, y, tileSize, tileSize, INI_PLAYER_HEALTH, 0, true, true, "Player");
+						break;
+					case 3:
+						int eX = j * tileSize;
+						int eY = i * tileSize;
+						enemy = new Enemy(eX, eY, tileSize * 2, tileSize * 2, INI_ENEMY_HEALTH);
+						break;
+					default:
+						break;
 				}
 			}
 		}
-		
+
 		// Audio
-		File bgMusic = new File("Sounds/bgMusic.wav");
-		File battleMusic = new File("Sounds/battleMusic.wav");
-		File poisonFX = new File("Sounds/poison.wav");
-		File mHitFX = new File("Sounds/mHit.wav");
-		File pHitFX = new File("Sounds/pHit.wav");
+		File bgMusic = new File("../Sounds/bgMusic.wav");
+		File battleMusic = new File("../Sounds/battleMusic.wav");
+		File poisonFX = new File("../Sounds/poison.wav");
+		File mHitFX = new File("../Sounds/mHit.wav");
+		File pHitFX = new File("../Sounds/pHit.wav");
 		try {
 			mainMenuAudio = AudioSystem.getAudioInputStream(bgMusic);
 			battleAudio = AudioSystem.getAudioInputStream(battleMusic);
@@ -149,7 +135,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 			poisonClip = AudioSystem.getClip();
 			mHitClip = AudioSystem.getClip();
 			pHitClip = AudioSystem.getClip();
-			
+
 			mainMenuClip.open(mainMenuAudio);
 			battleClip.open(battleAudio);
 			poisonClip.open(poisonAudio);
@@ -161,17 +147,17 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		addKeyListener(this);
 		timer = new Timer(MILISECS, this);
 		timer.start();
 	}
-	//----------------------- CONSTRUCTOR -----------------------------
-	
-	//------------------------------ METHODS --------------------------
+	// ----------------------- CONSTRUCTOR -----------------------------
+
+	// ------------------------------ METHODS --------------------------
 	public void update() {
 		if (isPlaying) {
-			//------------------------ PLAYER ---------------------------
+			// ------------------------ PLAYER ---------------------------
 			int hsp = rightKey - leftKey;
 			hsp *= 2;
 			player.setHsp(hsp);
@@ -182,44 +168,44 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 			} else {
 				player.stopJump();
 			}
-			
-			//------------- Player Collitions -----------
+
+			// ------------- Player Collitions -----------
 			// Horizontal
 			if (player.getxPos() + hsp + IMAGE_CORRECTION_H < tileSize) {
 				player.setHsp(0);
-			} else if (player.getxPos() + hsp - IMAGE_CORRECTION_H > tileSize*(divi-1)) {
+			} else if (player.getxPos() + hsp - IMAGE_CORRECTION_H > tileSize * (divi - 1)) {
 				player.setHsp(0);
 			}
 			// Vertical
-			if (player.getyPos() + player.getVsp() - IMAGE_CORRECTION_V > tileSize*(divi-2)) {
+			if (player.getyPos() + player.getVsp() - IMAGE_CORRECTION_V > tileSize * (divi - 2)) {
 				player.setVsp(0);
 				inFloor = true;
 				player.setJumping(false);
-			} 
-			//------------- Player Collitions -----------
+			}
+			// ------------- Player Collitions -----------
 			player.run();
-			//------------------------ PLAYER ---------------------------
-			
-			//------------------------ ENEMY ---------------------------		
+			// ------------------------ PLAYER ---------------------------
+
+			// ------------------------ ENEMY ---------------------------
 			// Enemy Collitions
 			// Horizontal
 			if (enemy.getxPos() + enemy.getHsp() < tileSize) {
-				enemy.setHsp(enemy.getHsp()*-1);
-			} else if (enemy.getxPos() + enemy.getHsp() + enemy.getWidth() > (tileSize*(divi-1))) {
-				enemy.setHsp(enemy.getHsp()*-1);
+				enemy.setHsp(enemy.getHsp() * -1);
+			} else if (enemy.getxPos() + enemy.getHsp() + enemy.getWidth() > (tileSize * (divi - 1))) {
+				enemy.setHsp(enemy.getHsp() * -1);
 			}
-			
+
 			// Vertical
-			if (enemy.getyPos() + enemy.getVsp() + enemy.getHeight() > tileSize*(divi-1)) {
+			if (enemy.getyPos() + enemy.getVsp() + enemy.getHeight() > tileSize * (divi - 1)) {
 				enemy.setVsp(0);
 				enemy.setInFloor(true);
 				enemy.setJumping(false);
 			}
-			
+
 			enemy.run();
-			//------------------------ ENEMY ---------------------------
-			
-			//---------------------- POISON --------------------------
+			// ------------------------ ENEMY ---------------------------
+
+			// ---------------------- POISON --------------------------
 			counter++;
 			if (enemy.inFloor) {
 				if (counter == shootFre) {
@@ -235,35 +221,35 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 						}
 						int yPower = 25;
 						if (player.xPos > enemy.getxPos()) {
-							poison.create(enemy.xPos, enemy.yPos-(enemy.height/2)+10, 
-									xPower, -yPower, tileSize*2, tileSize*2);
+							poison.create(enemy.xPos, enemy.yPos - (enemy.height / 2) + 10, xPower, -yPower,
+									tileSize * 2, tileSize * 2);
 						} else {
-							poison.create(enemy.xPos, enemy.yPos-(enemy.height/2)+10, 
-									-xPower, -yPower, tileSize*2, tileSize*2);
+							poison.create(enemy.xPos, enemy.yPos - (enemy.height / 2) + 10, -xPower, -yPower,
+									tileSize * 2, tileSize * 2);
 						}
-						
+
 						// Sound FX
 						poisonClip.setFramePosition(0);
 						poisonClip.start();
-						
+
 					}
 				}
 			}
-			
+
 			if (poison.isExists()) {
 				// Vertical collitions
-				if (poison.getyPos() + poison.getHeight() + poison.getVsp() > tileSize*(divi-1)) {
-					poison.setVsp(poison.getVsp()*-1);
-					poison.setVsp(poison.getVsp()/1.2);
+				if (poison.getyPos() + poison.getHeight() + poison.getVsp() > tileSize * (divi - 1)) {
+					poison.setVsp(poison.getVsp() * -1);
+					poison.setVsp(poison.getVsp() / 1.2);
 				}
-				
+
 				// Horizontal collition
 				if (poison.getxPos() + poison.getHsp() < tileSize) {
-					poison.setHsp(poison.getHsp()*-1);
-				} else if (poison.getxPos() + poison.getWidth() + poison.getHsp() > (tileSize*(divi-1))) {
-					poison.setHsp(poison.getHsp()*-1);
+					poison.setHsp(poison.getHsp() * -1);
+				} else if (poison.getxPos() + poison.getWidth() + poison.getHsp() > (tileSize * (divi - 1))) {
+					poison.setHsp(poison.getHsp() * -1);
 				}
-				
+
 				// Other collitions
 				int eJump = -10;
 				// Player
@@ -271,15 +257,18 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 					if (poison.getxPos() + poison.getHsp() < player.getxPos() + player.getWidth()) {
 						if (poison.getxPos() + poison.getHsp() > player.getxPos()) {
 							if (poison.getyPos() + poison.getHeight() + poison.getVsp() > player.getyPos()) {
-								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos() + player.getHeight()) {
+								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos()
+										+ player.getHeight()) {
 									hitPlayer(eJump);
 								}
 							}
 						}
 					} else if (poison.getxPos() + poison.getWidth() + poison.getHsp() > player.getxPos()) {
-						if (poison.getxPos() + poison.getWidth() + poison.getHsp() < player.getxPos() + player.getWidth()) {
+						if (poison.getxPos() + poison.getWidth() + poison.getHsp() < player.getxPos()
+								+ player.getWidth()) {
 							if (poison.getyPos() + poison.getHeight() + poison.getVsp() > player.getyPos()) {
-								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos() + player.getHeight()) {
+								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos()
+										+ player.getHeight()) {
 									hitPlayer(eJump);
 								}
 							}
@@ -289,22 +278,25 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 					if (poison.getxPos() + poison.getHsp() < player.getxPos()) {
 						if (poison.getxPos() + poison.getHsp() > player.getxPos() + player.getWidth()) {
 							if (poison.getyPos() + poison.getHeight() + poison.getVsp() > player.getyPos()) {
-								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos() + player.getHeight()) {
+								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos()
+										+ player.getHeight()) {
 									hitPlayer(eJump);
 								}
 							}
 						}
-					} else if (poison.getxPos() + poison.getWidth() + poison.getHsp() > player.getxPos() + player.getWidth()) {
+					} else if (poison.getxPos() + poison.getWidth() + poison.getHsp() > player.getxPos()
+							+ player.getWidth()) {
 						if (poison.getxPos() + poison.getWidth() + poison.getHsp() < player.getxPos()) {
 							if (poison.getyPos() + poison.getHeight() + poison.getVsp() > player.getyPos()) {
-								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos() + player.getHeight()) {
+								if (poison.getyPos() + poison.getHeight() + poison.getVsp() < player.getyPos()
+										+ player.getHeight()) {
 									hitPlayer(eJump);
 								}
 							}
 						}
 					}
 				}
-				
+
 				// Enemy
 				if (tools.place_meeting(poison.getxPos() + poison.getHsp(), poison.getyPos(), enemy)) {
 					poison.setVisible(false);
@@ -315,7 +307,8 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 					// Sound FX
 					mHitClip.setFramePosition(0);
 					mHitClip.start();
-				} else if (tools.place_meeting(poison.getxPos() + poison.getWidth() + poison.getHsp(), poison.getyPos(), enemy)) {
+				} else if (tools.place_meeting(poison.getxPos() + poison.getWidth() + poison.getHsp(), poison.getyPos(),
+						enemy)) {
 					poison.setVisible(false);
 					poison.setExists(false);
 					enemy.setVsp(eJump);
@@ -326,10 +319,10 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 					mHitClip.start();
 				}
 			}
-			
+
 			if (enemy.isShooting() && poison.isExists()) {
 				enemy.setShooting(false);
-				if(shootFre > 500) {
+				if (shootFre > 500) {
 					shootFre -= 100;
 				}
 				Random r = new Random();
@@ -339,13 +332,13 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 				} else {
 					enemy.setHsp(-monHsp);
 				}
-				
+
 				monHsp++;
 			}
-			
+
 			poison.update();
-			//---------------------- POISON --------------------------
-			
+			// ---------------------- POISON --------------------------
+
 			if (player.getHealth() == 0) {
 				loose();
 			} else if (enemy.getHealth() == 0) {
@@ -358,10 +351,10 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 				mainMenuClip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
 		}
-		
+
 		repaint();
 	}
-	
+
 	public void hitPlayer(int eJump) {
 		poison.setVisible(false);
 		poison.setExists(false);
@@ -372,7 +365,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 		pHitClip.setFramePosition(0);
 		pHitClip.start();
 	}
-	
+
 	public void win() {
 		isPlaying = false;
 		titles.setState(2);
@@ -383,7 +376,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 			mainMenuClip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
 	}
-	
+
 	public void loose() {
 		isPlaying = false;
 		titles.setState(3);
@@ -394,70 +387,69 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 			mainMenuClip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		Graphics graph = im.createGraphics();
-		
+
 		if (isPlaying) {
 			graph.setColor(bgColor);
 			graph.fillRect(0, 0, scr_size, scr_size);
-			
+
 			walls.paint(graph);
 			enemy.paint(graph);
 			player.paint(graph);
-			
+
 			if (poison.isVisible) {
 				poison.paint(graph);
 			}
 		} else {
 			titles.paint(graph);
 		}
-		
-		
-		g.drawImage(im, 0, 0, null);      
-	}
-	//------------------------------ METHODS --------------------------
 
-	//------------------------ KEYS -----------------------------------
+		g.drawImage(im, 0, 0, null);
+	}
+	// ------------------------------ METHODS --------------------------
+
+	// ------------------------ KEYS -----------------------------------
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_A:
-			leftKey = 1;
-			break;
-		case KeyEvent.VK_D:
-			rightKey = 1;
-			break;
-		case KeyEvent.VK_SPACE:
-			jumpKey = 1;
-			break;
+			case KeyEvent.VK_A:
+				leftKey = 1;
+				break;
+			case KeyEvent.VK_D:
+				rightKey = 1;
+				break;
+			case KeyEvent.VK_SPACE:
+				jumpKey = 1;
+				break;
 		}
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_A:
-			leftKey = 0;
-			break;
-		case KeyEvent.VK_D:
-			rightKey = 0;
-			break;
-		case KeyEvent.VK_SPACE:
-			jumpKey = 0;
-			break;
+			case KeyEvent.VK_A:
+				leftKey = 0;
+				break;
+			case KeyEvent.VK_D:
+				rightKey = 0;
+				break;
+			case KeyEvent.VK_SPACE:
+				jumpKey = 0;
+				break;
 		}
-		
+
 		if (!isPlaying) {
 			if (key == KeyEvent.VK_ENTER) {
 				isPlaying = true;
 				player.setHealth(INI_PLAYER_HEALTH);
 				enemy.setHealth(INI_ENEMY_HEALTH);
 				// Music
-				if(mainMenuClip.isRunning()) {
+				if (mainMenuClip.isRunning()) {
 					mainMenuClip.stop();
 					battleClip.setFramePosition(0);
 					battleClip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -469,15 +461,15 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener{
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
-	}
-	//------------------------ KEYS -----------------------------------
 
-	//------------------------- TIME ---------------------------------
+	}
+	// ------------------------ KEYS -----------------------------------
+
+	// ------------------------- TIME ---------------------------------
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		update();
 	}
-	//------------------------- TIME ---------------------------------
+	// ------------------------- TIME ---------------------------------
 
 }

@@ -9,7 +9,7 @@ public class Window extends JFrame {
 	// Main variables
 	MainCanvas canvas;
 	Color bgColor;
-	
+
 	// Constructors
 	public Window(int scr_size) {
 		super();
@@ -18,6 +18,6 @@ public class Window extends JFrame {
 		this.add(canvas, BorderLayout.CENTER);
 	}
 
-	//--------------------- METHODS ---------------------------
-	//--------------------- METHODS ---------------------------
+	// --------------------- METHODS ---------------------------
+	// --------------------- METHODS ---------------------------
 }
