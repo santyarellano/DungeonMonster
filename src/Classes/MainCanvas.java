@@ -55,9 +55,9 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 	private Clip mHitClip;
 	private Clip pHitClip;
 	private boolean musicBegan = false, fxBegan = false;
-	private int[] scn = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 3, 0, 1, 1,
-			0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
-			0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+	private int[] scn = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 3, 0, 1, 1,
+			0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1 };
 
 	// ------------------------ MAP CODES ----------------------------------
 	/*
@@ -85,7 +85,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 		titles = new Titles(0, 0, scr_size, scr_size);
 		enemySpd = 2;
 		// Create objects
-		for (int i = 0; i < divi; i++) {
+		for (int i = 0; i < divi - 3; i++) {
 			for (int j = 0; j < divi; j++) {
 				int arrPos = (i * divi) + j;
 				switch (scn[arrPos]) {
@@ -178,7 +178,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 				player.setHsp(0);
 			}
 			// Vertical
-			if (player.getyPos() + player.getVsp() - IMAGE_CORRECTION_V > tileSize * (divi - 2)) {
+			if (player.getyPos() + player.getVsp() - IMAGE_CORRECTION_V > tileSize * (divi - 5)) {
 				player.setVsp(0);
 				inFloor = true;
 				player.setJumping(false);
@@ -197,7 +197,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 			}
 
 			// Vertical
-			if (enemy.getyPos() + enemy.getVsp() + enemy.getHeight() > tileSize * (divi - 1)) {
+			if (enemy.getyPos() + enemy.getVsp() + enemy.getHeight() > tileSize * (divi - 4)) {
 				enemy.setVsp(0);
 				enemy.setInFloor(true);
 				enemy.setJumping(false);
@@ -239,7 +239,7 @@ public class MainCanvas extends JPanel implements KeyListener, ActionListener {
 
 			if (poison.isExists()) {
 				// Vertical collitions
-				if (poison.getyPos() + poison.getHeight() + poison.getVsp() > tileSize * (divi - 1)) {
+				if (poison.getyPos() + poison.getHeight() + poison.getVsp() > tileSize * (divi - 4)) {
 					poison.setVsp(poison.getVsp() * -1);
 					poison.setVsp(poison.getVsp() / 1.2);
 				}
